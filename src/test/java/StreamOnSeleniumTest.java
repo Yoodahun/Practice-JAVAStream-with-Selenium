@@ -76,6 +76,21 @@ public class StreamOnSeleniumTest {
 
     }
 
+    @Test
+    public void searchItemPriceUsingInputField() {
+        driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+        driver.findElement(By.id("search-field")).sendKeys("Rice");
+
+        List<WebElement> elements = driver.findElements(By.xpath("//tr/td[1]"));
+
+        List<WebElement> item = elements.stream()
+                .filter(s -> s.getText().contains("Rice"))
+                .collect(Collectors.toList());
+
+        Assert.assertEquals(elements, item);
+
+    }
+
     private String getPriceVeggie(WebElement s) {
 
         System.out.println(s.getText());
